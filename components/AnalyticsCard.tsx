@@ -44,16 +44,16 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = ({ data }) => {
     <div className="bg-white rounded-3xl p-6 shadow-sm flex flex-col justify-between h-[320px] relative overflow-hidden border border-gray-200/60">
       {/* Header */}
       <div className="flex justify-between items-start mb-2 z-20 relative">
-        <h3 className="text-gray-900 font-medium text-sm">Analytics</h3>
+        <h3 className="text-gray-900 font-medium text-sm">Compliance Extraction</h3>
       </div>
 
       {/* Amount - transitions when value changes */}
       <div className="z-20 relative">
         <div className="text-3xl font-semibold text-gray-900 tracking-tight transition-all duration-300">
-          {currentTotal}
+          {data[activeIndex]?.percentage}%
         </div>
         <p className="text-xs text-gray-500 mt-1 font-medium transition-opacity duration-300">
-          Revenue for {data[activeIndex]?.label}
+          {data[activeIndex]?.label}
         </p>
       </div>
 

@@ -97,7 +97,7 @@ const StatisticsCard: React.FC<StatisticsCardProps> = ({ total, points }) => {
     <div className="bg-[#8df4a8] rounded-3xl p-6 shadow-sm flex flex-col h-[320px] text-gray-900 relative overflow-hidden border border-[#6ed58c]/60">
       <div className="relative z-10 flex flex-col h-full pointer-events-none">
         <div className="flex justify-between items-start mb-2 pointer-events-auto">
-          <h3 className="font-medium text-sm text-gray-900">Active Loans</h3>
+          <h3 className="font-medium text-sm text-gray-900">Loans Under Covenant Monitoring</h3>
         </div>
 
         <div className="mb-6 pointer-events-auto">
@@ -105,7 +105,7 @@ const StatisticsCard: React.FC<StatisticsCardProps> = ({ total, points }) => {
              {total}
           </div>
           <div className="text-xs text-gray-500 font-medium h-5">
-            {isHovering ? `Value: ${activeValue}` : 'Weekly Overview'}
+            {isHovering ? `Compliant: ${activeValue}` : 'Weekly Status Changes'}
           </div>
         </div>
       </div>

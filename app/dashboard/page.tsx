@@ -23,10 +23,10 @@ export default function PortfolioDashboard() {
     { label: 'Sun', value: 145 },
   ];
 
-  const healthData: AnalyticsData[] = [
-    { label: 'Tech Sector', percentage: 88, amount: 88 },
-    { label: 'Real Estate', percentage: 65, amount: 65 },
-    { label: 'Retail', percentage: 72, amount: 72 },
+  const extractionData: AnalyticsData[] = [
+    { label: 'Auto Extracted', percentage: 92, amount: 92 },
+    { label: 'Manual Confirmed', percentage: 6, amount: 6 },
+    { label: 'Failed Extraction', percentage: 2, amount: 2 },
   ];
 
   const agreements: User[] = [
@@ -45,7 +45,7 @@ export default function PortfolioDashboard() {
     >
       <header className="max-w-7xl mx-auto px-5 pt-7 pb-5 flex justify-between items-end border-b border-gray-200/60 mb-8">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-[#1C1C1E]">Portfolio Overview</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-[#1C1C1E]">Covenant Monitoring Dashboard</h1>
           <p className="text-gray-500 text-sm font-medium mt-1">Real-time covenant compliance across all active loans</p>
         </div>
         <div className="flex items-center gap-2 px-3 py-1.5 bg-white rounded-full shadow-sm border border-gray-100 cursor-help group relative">
@@ -60,7 +60,7 @@ export default function PortfolioDashboard() {
       <main className="max-w-7xl mx-auto px-5 flex flex-col gap-8">
         <section>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Risk Summary</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Compliance Summary</h2>
             <div className="h-px bg-gray-200 flex-1" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
@@ -68,17 +68,17 @@ export default function PortfolioDashboard() {
               <CurrentBalanceCard />
             </div>
             <div className="lg:col-span-1">
-              <AnalyticsCard data={healthData} />
+              <AnalyticsCard data={extractionData} />
             </div>
             <div className="lg:col-span-1">
-              <StatisticsCard total="145 Active" points={complianceData} />
+              <StatisticsCard total="145 Compliant" points={complianceData} />
             </div>
           </div>
         </section>
 
         <section>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Trend Analysis</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Covenant Trend Analysis</h2>
             <div className="h-px bg-gray-200 flex-1" />
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -89,7 +89,7 @@ export default function PortfolioDashboard() {
 
         <section>
           <div className="flex items-center gap-4 mb-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Operational Activity</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">Portfolio Activity</h2>
             <div className="h-px bg-gray-200 flex-1" />
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">

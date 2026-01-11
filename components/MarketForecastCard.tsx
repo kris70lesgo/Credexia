@@ -6,10 +6,10 @@ const MarketForecastCard: React.FC = () => {
   const [sliderVal, setSliderVal] = useState(28); 
   
   const timeline = [
-    { year: 'Q4 23', label: 'Liquidity\nCrunch', active: false },
-    { year: 'Q1 24', label: 'Rate Hike\nImpact', active: false },
-    { year: 'Q2 24', label: 'Refinance\nWall', active: false },
-    { year: 'Q3 24', label: 'Sector\nStabilization', active: true },
+    { year: 'Q4 23', label: 'Covenant\nIntroduced', active: false },
+    { year: 'Q1 24', label: 'EBITDA\nDecline', active: false },
+    { year: 'Q2 24', label: 'Threshold\nBreached', active: false },
+    { year: 'Q3 24', label: 'Waiver\nIssued', active: true },
   ];
 
   const handleSliderChange = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -31,7 +31,7 @@ const MarketForecastCard: React.FC = () => {
             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-4 shadow-sm border border-gray-200">
                 <div className="w-4 h-4 border-[3px] border-gray-900 rounded-full" />
             </div>
-            <h3 className="font-semibold text-sm text-gray-900 leading-[1.3] uppercase tracking-[0.18em]">Risk Outlook</h3>
+            <h3 className="font-semibold text-sm text-gray-900 leading-[1.3] uppercase tracking-[0.18em]">Compliance Timeline</h3>
          </div>
 
          <div className="flex-1 relative flex flex-col justify-between py-2">
@@ -59,21 +59,22 @@ const MarketForecastCard: React.FC = () => {
       {/* RIGHT: Stacked Cards */}
       <div className="w-full md:w-[65%] flex flex-col gap-4">
         
-        {/* Volatility Card */}
+        {/* Breach Probability Card */}
         <div className="bg-[#8ff4aa] rounded-3xl p-5 flex flex-col justify-between h-[170px] relative overflow-hidden border border-[#6fd68e]/70">
             <div className="flex justify-between items-start">
                 <div>
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-800/70">Volatility Index</h4>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-800/70">Breach Probability Index</h4>
                     <div className="text-3xl font-semibold mt-1 text-gray-900 tabular-nums tracking-tight">
-                        {volatility.toFixed(1)}
+                        {(sliderVal * 0.65).toFixed(0)}%
                     </div>
+                    <p className="text-xs text-gray-700 mt-1 font-medium">Likelihood in next quarter</p>
                 </div>
                 <div className="w-6 h-6" />
             </div>
 
             <div className="mt-auto">
                 <div className="flex items-center gap-2 mb-3">
-                    <span className="text-sm font-semibold text-gray-900 tabular-nums">+{exposure.toFixed(2)}%</span>
+                    <span className="text-sm font-semibold text-gray-900 tabular-nums">Risk Score: {sliderVal.toFixed(0)}</span>
                 </div>
                 <div 
                    className="relative h-11 w-full rounded-xl border border-black/10 overflow-hidden cursor-pointer group"
@@ -95,12 +96,13 @@ const MarketForecastCard: React.FC = () => {
             </div>
         </div>
 
-        {/* Liquidity Card */}
+        {/* Covenant Cushion Card */}
         <div className="bg-[#a28cff] rounded-3xl p-5 flex flex-col justify-between h-[170px] relative overflow-hidden border border-purple-300/70">
              <div className="flex justify-between items-start z-10">
                 <div>
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80">Liquidity Forecast</h4>
-                    <div className="text-3xl font-semibold mt-1 text-white tracking-tight">$1.3B</div>
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-white/80">Projected Covenant Cushion</h4>
+                    <div className="text-3xl font-semibold mt-1 text-white tracking-tight">1.8x</div>
+                    <p className="text-xs text-white/70 mt-1 font-medium">Forecasted ratio</p>
                 </div>
                 <div className="w-6 h-6" />
             </div>

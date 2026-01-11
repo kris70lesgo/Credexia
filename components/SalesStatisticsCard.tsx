@@ -12,8 +12,10 @@ const SalesStatisticsCard: React.FC = () => {
   }, []);
 
   const data = [
-    { label: 'Q3 2024', purple: 20, green: 30, hatched: true }, 
-    { label: 'Q4 2024', purple: 45, green: 40, hatched: false }
+    { label: 'Q1 2024', compliant: 82, atRisk: 12, breached: 6, hatched: false }, 
+    { label: 'Q2 2024', compliant: 79, atRisk: 14, breached: 7, hatched: false },
+    { label: 'Q3 2024', compliant: 85, atRisk: 10, breached: 5, hatched: false },
+    { label: 'Q4 2024', compliant: 80, atRisk: 13, breached: 7, hatched: true }
   ];
 
   return (
@@ -22,8 +24,8 @@ const SalesStatisticsCard: React.FC = () => {
       {/* Header */}
       <div className="flex justify-between items-start z-20">
         <div>
-          <h2 className="text-sm font-medium tracking-wide text-white">Covenant Trends</h2>
-          <p className="text-xs text-gray-400 mt-1.5 font-normal">Risk signal velocity</p>
+          <h2 className="text-sm font-medium tracking-wide text-white">Covenant Status Trend</h2>
+          <p className="text-xs text-gray-400 mt-1.5 font-normal">Status changes per quarter</p>
         </div>
 
         {/* Dropdown */}
@@ -59,10 +61,10 @@ const SalesStatisticsCard: React.FC = () => {
       <div className="flex items-end justify-between mt-4 flex-1">
         <div className="pb-2">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-gray-400 text-xs font-medium">Risk Signals</span>
+            <span className="text-gray-400 text-xs font-medium">Total Monitored</span>
           </div>
           <div className="text-3xl font-semibold tracking-tight text-white">
-            124
+            145
           </div>
         </div>
 
@@ -74,11 +76,11 @@ const SalesStatisticsCard: React.FC = () => {
             ))}
           </div>
           {data.map((item) => {
-            const totalHeight = item.purple + item.green;
+            const totalHeight = item.compliant + item.atRisk + item.breached;
 
             return (
               <div key={item.label} className="flex flex-col items-center gap-4 group/bar cursor-pointer">
-                 <div className="relative w-[88px] h-[170px] flex items-end">
+                 <div className="relative w-[70px] h-[170px] flex items-end">
                     {item.hatched && (
                       <div className="absolute inset-0 w-full h-full rounded-2xl border border-dashed border-white/15 opacity-80 pointer-events-none" />
                     )}
@@ -90,14 +92,20 @@ const SalesStatisticsCard: React.FC = () => {
                         opacity: mounted ? 1 : 0
                       }}
                     >
-                       {/* Purple: Breach */}
+                       {/* Red: Breached */}
                        <div 
-                         className="w-full bg-[#7f6df4] transition-all duration-700 ease-out"
-                         style={{ height: `${(item.purple / totalHeight) * 100}%` }}
+                         className="w-full bg-[#ef4444] transition-all duration-700 ease-out"
+                         style={{ height: `${(item.breached / totalHeight) * 100}%` }}
                        />
+                       {/* Amber: At Risk */}
                        <div 
-                         className="w-full bg-[#7ee5a4] transition-all duration-700 ease-out delay-100"
-                         style={{ height: `${(item.green / totalHeight) * 100}%` }}
+                         className="w-full bg-[#f59e0b] transition-all duration-700 ease-out delay-75"
+                         style={{ height: `${(item.atRisk / totalHeight) * 100}%` }}
+                       />
+                       {/* Green: Compliant */}
+                       <div 
+                         className="w-full bg-[#10b981] transition-all duration-700 ease-out delay-150"
+                         style={{ height: `${(item.compliant / totalHeight) * 100}%` }}
                        />
                     </div>
                 </div>

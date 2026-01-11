@@ -59,8 +59,13 @@ const CurrentBalanceCard: React.FC = () => {
       
       {/* Header */}
       <div className="flex justify-between items-start z-10">
-      <h3 className="text-sm font-medium text-gray-900 tracking-tight max-w-[160px] leading-tight">Aggregate Headroom</h3>
-      <div className="flex gap-2" />
+      <h3 className="text-sm font-medium text-gray-900 tracking-tight max-w-[160px] leading-tight">Covenant Headroom</h3>
+      <div className="flex gap-2 relative group">
+        <div className="text-xs text-gray-700 cursor-help">ⓘ</div>
+        <div className="absolute top-full right-0 mt-2 w-56 bg-[#1C1C1E] text-white text-xs p-3 rounded-xl shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50">
+          Average remaining covenant buffer across monitored loans.
+        </div>
+      </div>
       </div>
 
       {/* Gauge */}
@@ -81,8 +86,11 @@ const CurrentBalanceCard: React.FC = () => {
            <path d={describeArc(cx, cy, r, startAngle, splitAngle)} stroke="#0f0f0f" strokeWidth="28" fill="none" strokeLinecap="round" className="drop-shadow-sm" />
            <circle cx={ix} cy={iy} r="7" fill="#a38bff" stroke="white" strokeWidth="2" className="shadow-sm transition-all duration-75" />
           
-          <text x={cx} y={cy - 20} textAnchor="middle" fontSize="30" fontWeight="700" fill="#1C1C1E" className="font-sans">
-             ${displayValue}M
+          <text x={cx} y={cy - 25} textAnchor="middle" fontSize="28" fontWeight="700" fill="#1C1C1E" className="font-sans">
+             +{(displayValue / 10).toFixed(1)}x
+          </text>
+          <text x={cx} y={cy + 5} textAnchor="middle" fontSize="10" fontWeight="500" fill="#666" className="font-sans">
+             Avg Buffer
           </text>
         </svg>
       </div>
@@ -91,11 +99,12 @@ const CurrentBalanceCard: React.FC = () => {
       <div className="z-10 mt-auto flex justify-between items-end">
          <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-3xl font-semibold text-gray-900">Safe</span>
+              <span className="text-3xl font-semibold text-gray-900">SAFE</span>
             </div>
-            <p className="text-gray-700 text-xs font-medium">Weighted Avg</p>
+            <p className="text-gray-700 text-xs font-medium">Debt/EBITDA Status</p>
          </div>
-           <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm border border-gray-200 text-gray-900">
+           <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm border border-gray-200 text-gray-900 relative">
+             <div className="absolute inset-0 rounded-2xl border-2 border-emerald-500 opacity-50"></div>
              <ShieldCheck size={20} strokeWidth={1.3} />
          </div>
       </div>

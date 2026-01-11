@@ -41,7 +41,7 @@ const PaymentTemplatesCard: React.FC<PaymentTemplatesCardProps> = ({
     <div className="bg-[#f8faf7] rounded-3xl p-6 shadow-sm flex flex-col min-h-[320px] h-auto transition-transform duration-300 border border-gray-200/60">
       {/* Header */}
       <div className="mb-6 flex justify-between items-start">
-        <h3 className="text-gray-900 font-medium text-sm">Payment Templates</h3>
+        <h3 className="text-gray-900 font-medium text-sm">Covenant Portfolio</h3>
       </div>
 
       {/* Amount */}
@@ -73,8 +73,8 @@ const PaymentTemplatesCard: React.FC<PaymentTemplatesCardProps> = ({
         <div className={`bg-white rounded-2xl p-5 relative transition-all duration-500 ease-in-out border border-gray-100`}>
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h4 className="text-sm font-semibold text-gray-900">Mandatory payments</h4>
-              <p className="text-xs text-gray-500 mt-1">Essential dues</p>
+              <h4 className="text-sm font-semibold text-gray-900">Monitored Loans</h4>
+              <p className="text-xs text-gray-500 mt-1">Active covenant tracking</p>
             </div>
             <div className="w-8 h-8" />
           </div>
