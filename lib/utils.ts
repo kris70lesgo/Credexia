@@ -107,6 +107,13 @@ export function getStatusColor(status: CovenantStatus | LoanStatus): {
         border: 'border-red-200',
         dot: 'bg-red-500',
       };
+    default:
+      return {
+        bg: 'bg-gray-50',
+        text: 'text-gray-700',
+        border: 'border-gray-200',
+        dot: 'bg-gray-500',
+      };
   }
 }
 

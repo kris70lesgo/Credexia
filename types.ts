@@ -60,6 +60,13 @@ export interface LoanFacility {
   nextTestDate: string;
 }
 
+export interface PaymentData {
+  totalAmount: number;
+  currency: string;
+  confidenceScore: number;
+  extractedDate: string;
+}
+
 export interface FilterState {
   status: LoanStatus[];
   covenantTypes: string[];

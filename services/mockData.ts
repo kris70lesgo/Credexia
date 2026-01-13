@@ -37,17 +37,16 @@ export const generateData = (count: number = 50): LoanFacility[] => {
     if (status === LoanStatus.WARNING) currentRatio = limitRatio - 0.05;
 
     return {
-      id: `id-${i}`,
-      borrowerName: COMPANIES[i % COMPANIES.length],
       loanId: generateLoanId(i),
-      outstandingAmount: usage,
-      totalLimit: limit,
+      borrowerName: COMPANIES[i % COMPANIES.length],
       covenantType: COVENANTS[i % COVENANTS.length],
       currentRatio: parseFloat(currentRatio.toFixed(2)),
       limitRatio: limitRatio,
       status: status,
+      outstandingAmount: usage,
+      creditLimit: limit,
       lastTestDate: getRandomDate(new Date('2023-09-01'), new Date('2024-03-15')),
-      currency: 'USD',
+      nextTestDate: getRandomDate(new Date('2024-04-01'), new Date('2024-06-30')),
     };
   });
 };

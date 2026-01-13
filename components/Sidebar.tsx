@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { LayoutDashboard, UploadCloud, PieChart, FileBarChart, Zap, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { LayoutDashboard, UploadCloud, PieChart, FileBarChart, Zap, PanelLeftClose, PanelLeftOpen, Workflow, TrendingUp } from 'lucide-react';
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -22,6 +22,8 @@ export default function Sidebar({ children }: SidebarProps) {
     { label: 'Upload Financials', icon: UploadCloud, path: '/upload' },
     { label: 'Portfolio', icon: PieChart, path: '/loans' },
     { label: 'Reports', icon: FileBarChart, path: '/reports' },
+    { label: 'AgentFlow', icon: Workflow, path: '/agentflow' },
+    { label: 'TradeClear', icon: TrendingUp, path: '/tradeclear' },
   ];
 
   return (

@@ -46,7 +46,18 @@ export default function LoansPage() {
 
         if (response.ok && result.loans && result.loans.length > 0) {
           // Transform API response to match LoanFacility interface
-          const liveLoans: LoanFacility[] = result.loans.map((loan) => ({
+          const liveLoans: LoanFacility[] = result.loans.map((loan: {
+            id: string;
+            borrowerName: string;
+            facilityAmount: number;
+            outstandingAmount: number;
+            covenantType: string;
+            currentRatio: number | null;
+            covenantLimit: number;
+            status: string;
+            lastTestDate: string | null;
+            isSealed: boolean;
+          }) => ({
             loanId: loan.id,
             borrowerName: loan.borrowerName,
             facilityAmount: loan.facilityAmount,

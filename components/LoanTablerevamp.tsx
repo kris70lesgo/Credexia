@@ -89,10 +89,10 @@ export const LoanTable: React.FC<LoanTableProps> = ({ data }) => {
                       <div className="w-12 h-1 bg-gray-100 rounded-full overflow-hidden">
                         <div 
                           className="h-full bg-gray-400 rounded-full" 
-                          style={{ width: `${(loan.outstandingAmount / loan.totalLimit) * 100}%` }}
+                          style={{ width: `${(loan.outstandingAmount / loan.creditLimit) * 100}%` }}
                         />
                       </div>
-                      <span className="text-[10px] text-gray-500">of {formatCompactCurrency(loan.totalLimit)}</span>
+                      <span className="text-[10px] text-gray-500">of {formatCompactCurrency(loan.creditLimit)}</span>
                     </div>
                   </div>
                 </td>
