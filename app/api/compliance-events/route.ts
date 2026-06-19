@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createSupabaseAdmin } from '@/lib/supabase';
+import { mockComplianceEvents, mockLoans } from '@/lib/mock-data';
 import { 
   rateLimit, 
   validateLoanId,
   sanitizeError,
   addSecurityHeaders,
-  logSecurityEvent 
+  logSecurityEvent
 } from '@/lib/security';
 
 /**
@@ -31,67 +31,32 @@ export async function GET(request: NextRequest) {
       ));
     }
 
-    const supabase = createSupabaseAdmin();
+    const maxLimit = Math.min(limit, 1000);
+    const filteredEvents = mockComplianceEvents
+      .filter((event) => !loanId || event.loanId === loanId)
+      .slice(0, maxLimit);
+    const loanLookup = new Map(mockLoans.map((loan) => [loan.id, loan]));
 
-    // Build query - fetch covenant results with loan details
-    let query = supabase
-      .from('covenant_results')
-      .select(`
-        id,
-        loan_id,
-        upload_id,
-        test_date,
-        total_debt,
-        ebitda,
-        debt_to_ebitda_ratio,
-        covenant_status,
-        tx_hash,
-        block_number,
-        loans!inner(
-          name,
-          covenant_limit
-        )
-      `)
-      .order('test_date', { ascending: false })
-      .limit(Math.min(limit, 1000)); // Cap at 1000 for safety
+    const formattedEvents = filteredEvents.map((event) => {
+      const loan = loanLookup.get(event.loanId);
 
-    // Filter by loan if specified
-    if (loanId) {
-      query = query.eq('loan_id', loanId);
-    }
-
-    const { data: events, error: eventsError } = await query;
-
-    if (eventsError) {
-      logSecurityEvent('Failed to fetch compliance events', { error: eventsError.message });
-      return addSecurityHeaders(NextResponse.json(
-        { error: sanitizeError(eventsError) },
-        { status: 500 }
-      ));
-    }
-
-    // Transform data for frontend
-    const formattedEvents = (events || []).map((event) => {
-      // Supabase returns loans as array even with !inner, get first element
-      const loan = Array.isArray(event.loans) ? event.loans[0] : event.loans;
-      
       return {
         id: event.id,
         eventId: `EVT-${event.id.slice(0, 8).toUpperCase()}`,
-        loanId: event.loan_id,
-        borrowerName: loan?.name || 'Unknown',
-        covenantType: 'Debt/EBITDA', // MVP only supports Debt/EBITDA
-        exposure: null, // Not tracked in MVP
-        totalDebt: event.total_debt,
+        loanId: event.loanId,
+        borrowerName: loan?.borrowerName || 'Unknown',
+        covenantType: 'Debt/EBITDA',
+        exposure: loan?.outstandingAmount ?? null,
+        totalDebt: event.totalDebt,
         ebitda: event.ebitda,
-        ratio: event.debt_to_ebitda_ratio,
-        
-        covenantLimit: loan?.covenant_limit || 3.5,
-        status: event.covenant_status,
-        testDate: event.test_date,
-        txHash: event.tx_hash,
-        blockNumber: event.block_number,
-        uploadId: event.upload_id,
+        ratio: event.ratio,
+        covenantLimit: loan?.covenantLimit || 3.5,
+        status: event.status,
+        testDate: event.timestamp,
+        txHash: event.txHash,
+        blockNumber: event.blockNumber,
+        uploadId: event.documentId,
+        source: 'mock',
       };
     });
 
@@ -101,10 +66,10 @@ export async function GET(request: NextRequest) {
       count: formattedEvents.length,
     }));
 
-  } catch (error: unknown) {
+  } catch (error) {
     logSecurityEvent('Compliance events API error', { error: sanitizeError(error) });
     return addSecurityHeaders(NextResponse.json(
-      { error: sanitizeError(error) },
+      { error: 'Error formatting compliance events' },
       { status: 500 }
     ));
   }
